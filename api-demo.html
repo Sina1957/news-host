@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تک نیوز | API جاوا</title>
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    .api-wrap { max-width: 900px; margin: 40px auto; }
+    .api-toolbar { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; }
+    .api-toolbar button, .api-toolbar select {
+      border: 1px solid var(--border); background: var(--surface); color: var(--text);
+      padding: 9px 16px; border-radius: 8px; font-size: 13px; font-weight: 700;
+    }
+    .api-toolbar button { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .api-toolbar button:hover { background: var(--primary-hover); }
+    .api-list { display: grid; gap: 12px; }
+    .api-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; }
+    .api-item h3 { font-size: 15px; margin-bottom: 6px; }
+    .api-item p { color: var(--muted); font-size: 12.5px; }
+    .api-status { padding: 12px 16px; border-radius: 8px; font-size: 13px; margin-bottom: 16px; }
+    .api-status.ok { background: #d1fae5; color: #065f46; }
+    .api-status.err { background: #fee2e2; color: #991b1b; }
+    pre { direction: ltr; text-align: left; background: var(--header); color: #a5f3fc; padding: 16px; border-radius: 10px; overflow: auto; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-mark">ت<span>ک</span></span>
+        <span class="logo-text">تک<span>نیوز</span></span>
+      </a>
+      <div style="margin-inline-start:auto;color:#9fb0ca;font-size:13px;">صفحه تست API جاوا</div>
+    </div>
+  </header>
+
+  <main class="container api-wrap">
+    <div class="section-heading">
+      <h2><span class="heading-bar"></span> تست سرور جاوا</h2>
+      <a href="index.html" class="read-more">بازگشت به سایت ←</a>
+    </div>
+
+    <div class="api-status" id="api-status">در حال تلاش برای اتصال به سرور...</div>
+
+    <div class="api-toolbar">
+      <button id="btn-all">همه اخبار</button>
+      <select id="category-select" aria-label="انتخاب دسته بندی">
+        <option value="">انتخاب دسته بندی...</option>
+      </select>
+      <button id="btn-newsletter">تست خبرنامه (POST)</button>
+    </div>
+
+    <div class="api-list" id="api-list"></div>
+    <h3 style="margin-top:28px;font-size:15px;">پاسخ خام سرور:</h3>
+    <pre id="api-raw">—</pre>
+  </main>
+
+  <script>
+    const statusEl = document.getElementById("api-status");
+    const listEl = document.getElementById("api-list");
+    const rawEl = document.getElementById("api-raw");
+    const selectEl = document.getElementById("category-select");
+
+    function setStatus(message, ok) {
+      statusEl.textContent = message;
+      statusEl.className = "api-status " + (ok ? "ok" : "err");
+    }
+
+    function render(items) {
+      listEl.innerHTML = "";
+      items.forEach(function (item) {
+        const div = document.createElement("div");
+        div.className = "api-item";
+        const h = document.createElement("h3");
+        h.textContent = item.title;
+        const p = document.createElement("p");
+        p.textContent = item.category + " • " + item.date + " • " + item.readTime;
+        div.appendChild(h);
+        div.appendChild(p);
+        listEl.appendChild(div);
+      });
+      rawEl.textContent = JSON.stringify(items, null, 2);
+    }
+
+    async function loadCategories() {
+      const res = await fetch("/api/categories");
+      if (!res.ok) throw new Error("خطا در دریافت دسته بندیها");
+      const categories = await res.json();
+      categories.forEach(function (cat) {
+        if (cat === "همه") return;
+        const option = document.createElement("option");
+        option.value = cat;
+        option.textContent = cat;
+        selectEl.appendChild(option);
+      });
+    }
+
+    async function loadNews(category) {
+      const url = category ? "/api/news?category=" + encodeURIComponent(category) : "/api/news";
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("خطا در دریافت اخبار");
+      const items = await res.json();
+      render(items);
+      setStatus("✓ متصل به سرور جاوا — " + items.length + " خبر دریافت شد.", true);
+    }
+
+    document.getElementById("btn-all").addEventListener("click", function () {
+      loadNews("").catch(function (e) { setStatus("✗ " + e.message, false); });
+    });
+    selectEl.addEventListener("change", function () {
+      loadNews(selectEl.value).catch(function (e) { setStatus("✗ " + e.message, false); });
+    });
+    document.getElementById("btn-newsletter").addEventListener("click", async function () {
+      try {
+        const res = await fetch("/api/newsletter", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: "test@example.com" }),
+        });
+        const data = await res.json();
+        rawEl.textContent = JSON.stringify(data, null, 2);
+        setStatus(data.ok ? "✓ " + data.message : "✗ " + data.message, data.ok);
+      } catch (e) {
+        setStatus("✗ " + e.message, false);
+      }
+    });
+
+    (async function init() {
+      try {
+        await loadCategories();
+        await loadNews("");
+      } catch (e) {
+        setStatus("✗ سرور جاوا در حال اجرا نیست. ابتدا دستور npm run java را اجرا کنید.", false);
+        rawEl.textContent = String(e);
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "name": "tech-news",
+  "version": "1.0.0",
+  "private": true,
+  "description": "سایت خبری فناوری فارسی (RTL) — فرانت HTML/CSS/JS و API ساده جاوا",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "java:build": "javac -encoding UTF-8 -d build src/main/java/com/technews/NewsServer.java",
+    "java": "npm run java:build && java -cp build com.technews.NewsServer",
+    "start": "npm run dev"
+  },
+  "devDependencies": {
+    "vite": "^6.0.0"
+  },
+  "allowScripts": {
+    "esbuild@0.25.12": true
+  }
+}
