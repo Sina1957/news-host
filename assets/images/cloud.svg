@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="clbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#082f49"/>
+      <stop offset="1" stop-color="#1d4ed8"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#clbg)"/>
+  <g fill="#bae6fd" opacity="0.25"><circle cx="120" cy="110" r="6"/><circle cx="700" cy="120" r="8"/><circle cx="650" cy="350" r="5"/><circle cx="180" cy="360" r="7"/></g>
+  <path d="M300 300 a70 70 0 0 1 10 -139 a95 95 0 0 1 180 15 a65 65 0 0 1 -5 124 Z" fill="#e0f2fe" opacity="0.95"/>
+  <path d="M400 330 V235 M365 270 L400 235 L435 270" fill="none" stroke="#2563eb" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M250 330 H550" stroke="#7dd3fc" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+  <text x="40" y="410" fill="#bae6fd" font-family="Arial" font-size="20" font-weight="bold" opacity="0.6">CLOUD COMPUTING</text>
+</svg>

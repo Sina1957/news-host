@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="codebg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#052e2b"/>
+      <stop offset="1" stop-color="#0f766e"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#codebg)"/>
+  <g fill="#5eead4" opacity="0.12"><rect x="60" y="60" width="120" height="120" rx="16"/><circle cx="700" cy="360" r="80"/></g>
+  <path d="M300 150 L210 225 L300 300" fill="none" stroke="#5eead4" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M500 150 L590 225 L500 300" fill="none" stroke="#5eead4" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M450 130 L350 320" fill="none" stroke="#fde68a" stroke-width="12" stroke-linecap="round"/>
+  <g fill="#99f6e4" opacity="0.35"><circle cx="130" cy="340" r="5"/><circle cx="660" cy="100" r="6"/><circle cx="600" cy="70" r="4"/></g>
+  <text x="40" y="410" fill="#99f6e4" font-family="Arial" font-size="20" font-weight="bold" opacity="0.6">SOFTWARE</text>
+</svg>

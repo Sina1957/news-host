@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="rbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#431407"/>
+      <stop offset="1" stop-color="#7c2d12"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#rbg)"/>
+  <g fill="none" stroke="#fdba74" stroke-opacity="0.2" stroke-width="2"><circle cx="400" cy="225" r="170"/><circle cx="400" cy="225" r="210"/></g>
+  <rect x="290" y="110" width="220" height="170" rx="40" fill="#292524" stroke="#fdba74" stroke-width="4"/>
+  <path d="M400 110 V70" stroke="#fdba74" stroke-width="6"/><circle cx="400" cy="62" r="10" fill="#fed7aa"/>
+  <rect x="320" y="165" width="60" height="40" rx="18" fill="#fbbf24"/><rect x="420" y="165" width="60" height="40" rx="18" fill="#fbbf24"/>
+  <circle cx="350" cy="185" r="8" fill="#1c1917"/><circle cx="450" cy="185" r="8" fill="#1c1917"/>
+  <rect x="355" y="235" width="90" height="22" rx="11" fill="#44403c"/>
+  <path d="M340 280 V330 M460 280 V330" stroke="#fdba74" stroke-width="12" stroke-linecap="round"/>
+  <text x="40" y="410" fill="#fed7aa" font-family="Arial" font-size="20" font-weight="bold" opacity="0.6">ROBOTICS</text>
+</svg>

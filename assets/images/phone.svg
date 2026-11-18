@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="pbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1e1b4b"/>
+      <stop offset="1" stop-color="#4338ca"/>
+    </linearGradient>
+    <linearGradient id="pscreen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#a78bfa"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#pbg)"/>
+  <g fill="#a5b4fc" opacity="0.2"><circle cx="150" cy="100" r="55"/><circle cx="680" cy="360" r="70"/><circle cx="650" cy="90" r="25"/></g>
+  <rect x="315" y="50" width="170" height="350" rx="28" fill="#0b1220" stroke="#818cf8" stroke-width="4"/>
+  <rect x="327" y="70" width="146" height="310" rx="18" fill="url(#pscreen)"/>
+  <rect x="370" y="58" width="60" height="8" rx="4" fill="#312e81"/>
+  <circle cx="555" cy="225" r="70" fill="none" stroke="#c4b5fd" stroke-opacity="0.35" stroke-width="2"/>
+  <circle cx="245" cy="225" r="70" fill="none" stroke="#c4b5fd" stroke-opacity="0.35" stroke-width="2"/>
+  <text x="40" y="410" fill="#c7d2fe" font-family="Arial" font-size="20" font-weight="bold" opacity="0.6">MOBILE TECH</text>
+</svg>

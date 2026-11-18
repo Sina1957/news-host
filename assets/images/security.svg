@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="sbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#0f766e"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#sbg)"/>
+  <g fill="none" stroke="#5eead4" stroke-opacity="0.18" stroke-width="1">
+    <circle cx="400" cy="225" r="150"/><circle cx="400" cy="225" r="190"/><circle cx="400" cy="225" r="230"/>
+  </g>
+  <path d="M400 95 L520 145 V235 C520 320 465 365 400 390 C335 365 280 320 280 235 V145 Z" fill="#134e4a" stroke="#5eead4" stroke-width="3"/>
+  <rect x="360" y="225" width="80" height="65" rx="8" fill="#ccfbf1"/>
+  <path d="M378 225 V205 a22 22 0 0 1 44 0 V225" fill="none" stroke="#ccfbf1" stroke-width="8"/>
+  <circle cx="400" cy="252" r="6" fill="#0f766e"/>
+  <text x="40" y="410" fill="#99f6e4" font-family="Arial" font-size="20" font-weight="bold" opacity="0.6">CYBER SECURITY</text>
+</svg>
