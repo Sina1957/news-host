@@ -35,7 +35,7 @@ javac -encoding UTF-8 -d build src/main/java/com/technews/NewsServer.java
 java -cp build com.technews.NewsServer
 ```
 
-> نکته: چون Node.js و JDK در حال حاضر روی سیستم نصب نیستند، دستورات بالا تا زمان نصب آنها کار نمیکنند. روش شماره ۱ همین الان کار میکند.
+> نکته: Node.js v26.13.1 (npm 11.20.0) و JDK 17 (Temurin) نصب و تنظیم شدهاند. در PowerShell، Execution Policy کاربر به `RemoteSigned` تنظیم شد تا دستور `npm` بدون مشکل اجرا شود.
 
 ### ۴) npm + جاوا با هم (Full-Stack)
 ابتدا سرور جاوا را اجرا کنید، سپس Vite:
@@ -63,6 +63,12 @@ Vite درخواستهای `/api` را به `http://localhost:8080` پاس مید
 
 همه پاسخها JSON و UTF-8 هستند و هدر CORS دارند.
 
+## اتصال JavaScript به API
+
+صفحه اصلی با `assets/js/api.js` از طریق `fetch` اخبار را از `/api/news` میگیرد و با `assets/js/app.js` آنها را رندر میکند. فیلتر، جستجو و دکمه «نمایش اخبار بیشتر» بعد از لود شدن دادهها دوباره متصل میشوند. فرم خبرنامه هم در حالت متصل به سرور، ایمیل را با `POST /api/newsletter` ارسال میکند.
+
+اگر سرور جاوا در دسترس نباشد (مثلاً وقتی فایل `index.html` مستقیم باز شده)، صفحه به حالت استاتیک برمیگردد و نشانگر «حالت محلی» را نشان میدهد — بنابراین سایت همیشه کار میکند.
+
 ## ساختار پوشهها
 
 ```
@@ -75,7 +81,8 @@ tech-news/
 ├── src/main/java/com/technews/NewsServer.java
 ├── assets/
 │   ├── css/style.css
-│   ├── js/app.js
+│   ├── js/api.js           # کلاینت fetch به API جاوا
+│   ├── js/app.js           # رندر، فیلتر، جستجو و حالت تاریک
 │   └── images/*.svg
 └── .gitignore
 ```
