@@ -209,7 +209,7 @@
       '    <span class="badge badge-new">API</span></div>',
       '  <div class="news-card-body">',
       '    <div class="article-meta"><span class="tag ' + tagClass + '">' + escapeHtml(item.category) + '</span><span>' + escapeHtml(item.date) + '</span></div>',
-      '    <h3><a href="#">' + escapeHtml(item.title) + '</a></h3>',
+      '    <h3><a href="#news" data-article="' + escapeHtml(item.id) + '">' + escapeHtml(item.title) + '</a></h3>',
       '    <p>' + escapeHtml(item.excerpt) + '</p>',
       '    <div class="card-footer"><span>توسط: تحریریه تک نیوز</span><span>' + escapeHtml(item.readTime) + ' مطالعه</span></div>',
       '  </div>',
@@ -279,5 +279,64 @@
   }, { passive: true });
   backToTop.addEventListener("click", function () {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  /* ---------- پنجره مطالعه خبر ---------- */
+  const articleData = window.TechNewsArticles || {};
+  const modal = $("#article-modal");
+
+  function openArticle(id) {
+    const data = articleData[id];
+    if (!modal || !data) return;
+
+    $("#modal-title").textContent = data.title;
+    const image = $("#modal-image");
+    image.src = data.image || "assets/images/hero-ai.svg";
+    image.alt = data.title;
+
+    const meta = $("#modal-meta");
+    meta.innerHTML = "";
+    const tag = document.createElement("span");
+    tag.className = "tag " + (TAG_CLASSES[data.category] || "tag-ai");
+    tag.textContent = data.category;
+    const date = document.createElement("span");
+    date.textContent = data.date;
+    const divider = document.createElement("span");
+    divider.textContent = "•";
+    const time = document.createElement("span");
+    time.textContent = data.readTime;
+    meta.append(tag, date, divider, time);
+
+    const body = $("#modal-body");
+    body.innerHTML = "";
+    (data.body || []).forEach(function (paragraph) {
+      const p = document.createElement("p");
+      p.textContent = paragraph;
+      body.appendChild(p);
+    });
+
+    modal.hidden = false;
+    document.body.style.overflow = "hidden";
+    $("#modal-close").focus();
+  }
+
+  function closeArticle() {
+    if (!modal || modal.hidden) return;
+    modal.hidden = true;
+    document.body.style.overflow = "";
+  }
+
+  document.addEventListener("click", function (event) {
+    const link = event.target.closest("[data-article]");
+    if (link) {
+      event.preventDefault();
+      openArticle(link.dataset.article);
+      return;
+    }
+    if (event.target.closest("[data-close-modal]")) closeArticle();
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") closeArticle();
   });
 })();
